@@ -1,24 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
+import Navbar from './components/Navbar';
+import {Switch,Route} from 'react-router-dom';
+import Books from './components/Books';
+import LandingPage from './components/Landing';
+import Handouts from './components/Handouts';
+import Magazines from './components/Magazines';
+import Footer from './components/Footer';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Switch>
+        <Route path="/" exact component={LandingPage} />
+        <Route path="/Books" component={Books} />
+        <Route path="/Handouts" component={Handouts} />
+        <Route path="/Magazines" component={Magazines} />
+      </Switch>
+      <Footer />
     </div>
   );
 }
