@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import Book from "./Book";
 import style from "styled-components";
+import {ProductConsumer} from '../context';
 
 class Catagory extends Component {
   state = {
     length: 5,
     Next:-70,
-    Back:0
+    Back:0,
   };
 
   NextSlide =(e)=>{
     document.getElementById(this.props.title).style.marginLeft=this.state.Next+"px";
-    if (this.state.Next>-490) {
+    var len = document.getElementsByClassName("length").length/3;
+    if (this.state.Next>(-70*len)) {
       this.setState({
         Next:this.state.Next-70
       });
@@ -35,14 +37,18 @@ class Catagory extends Component {
             <img src="img/Backarrow.png" alt="Back" />
           </Button>
           <div className="slide" id={this.props.title}>
-          <Book />
-          <Book />
-          <Book />
-          <Book />
-          <Book />
-          <Book />
-          <Book />
-          <Book />
+          <ProductConsumer>
+            {(value)=>{
+              // console.log(value.product);
+              let tempproduct = [...value.products];
+              tempproduct = tempproduct.filter(item=>(item.catagory===this.props.title && item.type==="Book"));
+              return (
+                tempproduct.map(product=>{
+                  return <Book key={product.id} product={product} />
+                })
+              );
+            }}
+          </ProductConsumer>
           </div>
           <Button className="nextarrow" id="nextarrow" onClick={this.NextSlide}>
             <img src="img/Nextarrow.png" alt="Back" />

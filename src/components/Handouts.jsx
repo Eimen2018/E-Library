@@ -6,12 +6,12 @@ class Handouts extends Component {
   render() {
     return (
       <main>
-        <section class="presentation-2 ">
+        <section className="presentation-2 ">
           <div className="handouts ">
           <h5>Departments</h5>
           <div className="handouts-container ">
-          <Handout dept="Information System" courselen="7"/>
-          <Handout dept="Computer Science" courselen="5"/>
+          <Handout dept="Information System" courselen="5"/>
+          <Handout dept="Computer Science" courselen="6"/>
           <Handout dept="Software Engineering" courselen="6"/>
           </div>
           </div>

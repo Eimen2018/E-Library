@@ -6,7 +6,7 @@ class Magazines extends Component {
   render() {
     return (
       <main>
-        <section class="presentation">
+        <section className="presentation">
           <Magazine />
         </section>
       </main>

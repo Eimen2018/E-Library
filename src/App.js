@@ -8,6 +8,8 @@ import Magazines from "./components/Magazines";
 import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import Details from "./components/Details";
+import Default from "./components/Default";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/Books" component={Books} />
         <Route path="/Handouts" component={Handouts} />
         <Route path="/Magazines" component={Magazines} />
+        <Route path="/Details" component={Details} />
+        <Route path="*" component={Default} />
       </Switch>
       <Footer />
     </div>

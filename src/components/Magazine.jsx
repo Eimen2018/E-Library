@@ -3,11 +3,14 @@ class Magazine extends Component {
   state = {};
   render() {
     return (
-      <div class="coming-soon">
+      <div className="coming-soon">
         <div className="coming-soon-img">
-        <img src="img/coming-soon.png" alt=""/>
+        <img src="img/under_construction.png" alt=""/>
         </div>
-        <h1>Coming Soon...</h1>
+        <div className="magazine-text">
+        <h1>Under Construction</h1>
+        <h3>Coming Soon...</h3>
+        </div>
       </div>
     );
   }

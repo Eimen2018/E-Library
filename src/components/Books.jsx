@@ -6,10 +6,10 @@ class Books extends Component {
   render() {
     return (
       <main>
-        <section class="presentation-2">
-          <Catagory title="Education"/>
-          <Catagory title="Programming"/>
-          <Catagory title="Fiction"/>
+        <section className="presentation-2">
+          <Catagory title="Educational" />
+          <Catagory title="Programming" />
+          <Catagory title="Fiction" />
         </section>
       </main>
     );
@@ -17,3 +17,28 @@ class Books extends Component {
 }
 
 export default Books;
+
+//componentDidMount(){
+//   axios
+//   .post("http://localhost:80/E-commerce-Back-End/index.php", {
+//     data: {
+//       name: "jessie",
+//       time: "12:00",
+//       food: "milk",
+//       nutrition: "vitaminA"
+//     }
+//   })
+//   .then(response => {
+//     // console.log(response);
+//     // console.log(response.data);
+//     this.filter = response.data;
+//     this.setState({
+//       data:response.data
+//     });
+
+//     console.log(this.state.data.data.name);
+//   })
+//   .catch(e => {
+//     // this.errors.push(e);
+//   });
+// }
