@@ -644,3 +644,36 @@ textarea {
 .pagenotfound {
   margin-top: 0px;
 }
+.login-btn{
+  border: 1px solid #1f357d !important;
+  color: #1f357d !important;
+  padding: 4px 20px !important;
+}
+.login-btn:hover{
+  transition: all 0.3s linear;
+  background: #1f357d !important;
+  color: whitesmoke !important;
+}
+.payment-info{
+  color: white !important;
+  background: #1f357d !important;
+  padding: 10px;
+}
+.payment-container{
+  background: #1f357d;
+}
+.account-name{
+color: #1f357d !important;
+}
+.pay-info{
+  background: #1f357d !important;
+  color: white !important;
+  padding: 5px;
+  border-radius: 0px 30px 30px 0;
+  margin-right: 10px;
+}
+.magazine-text h6,.magazine-text p{
+  margin-top: 15px !important;
+  /* border: 1px solid #1f357d; */
+  padding: 5px;
+}

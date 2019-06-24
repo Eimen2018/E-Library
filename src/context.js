@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { storeProducts, detailProduct } from "./data";
+import { storeProducts, detailProduct, Account } from "./data";
 
 const ProductContext = React.createContext();
 
@@ -7,16 +7,22 @@ class ProductProvider extends Component {
   state = {
     products: [],
     detailProduct: detailProduct,
+    Account: Account,
     cart: [],
     cartSubtotal: 0,
     cartTax: 0,
-    cartTotal: 0
+    cartTotal: 0,
+    loggedin: false
   };
 
   componentDidMount() {
     this.setProducts();
   }
-
+  auth = () => {
+    this.setState(() => {
+      return { loggedin: !this.state.loggedin };
+    });
+  };
   setProducts = () => {
     let tempProducts = [];
     storeProducts.forEach(item => {
@@ -32,7 +38,9 @@ class ProductProvider extends Component {
   getItem = id => {
     return this.state.products.find(item => item.id === id);
   };
-
+  getAccount = id => {
+    return this.state.Account.find(item => item.id === id);
+  };
   handleDetail = id => {
     const product = this.getItem(id);
     this.setState(() => {
@@ -53,6 +61,23 @@ class ProductProvider extends Component {
       },
       () => {
         this.addTotals();
+      }
+    );
+  };
+  Checkout = amount => {
+    let tempAccouts = this.state.Account;
+    // const index = tempAccouts.indexOf(this.getAccount(id));
+    // const account = tempAccouts[index];
+    tempAccouts.balance -= amount;
+    this.setState(
+      () => {
+        return {
+          Account: tempAccouts
+        };
+      },
+      () => {
+        this.clearCart();
+        console.log(this.state.Account);
       }
     );
   };
@@ -155,7 +180,9 @@ class ProductProvider extends Component {
           increment: this.increment,
           decrement: this.decrement,
           removeItem: this.removeItem,
-          clearCart: this.clearCart
+          clearCart: this.clearCart,
+          checkout: this.Checkout,
+          auth:this.auth
         }}
       >
         {this.props.children}

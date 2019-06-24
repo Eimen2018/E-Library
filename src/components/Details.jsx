@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { ProductConsumer } from "../context";
 import { Link } from "react-router-dom";
-import history from 'react-router-dom/MemoryRouter'
 
 class Details extends Component {
   state = {};
@@ -25,7 +24,7 @@ class Details extends Component {
               return (
                 <div className="container">
                   <div className="row my-5 ">
-                    <Link to={type=="Book"?"/Books":"/Handouts"}>
+                    <Link to={type==="Book"?"/Books":"/Handouts"}>
                       <button className="back-desc mx-auto">
                         <img src="img/back_2.png" alt="Back" width="40" />
                       </button>

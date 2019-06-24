@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./components/Navbar";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Books from "./components/Books";
 import LandingPage from "./components/Landing";
 import Handouts from "./components/Handouts";
@@ -10,6 +10,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Details from "./components/Details";
 import Default from "./components/Default";
+import Auth from "./components/Auth.jsx";
+import Payment from "./components/Payment";
+import { ProductConsumer } from "./context";
 
 function App() {
   return (
@@ -21,6 +24,19 @@ function App() {
         <Route path="/Handouts" component={Handouts} />
         <Route path="/Magazines" component={Magazines} />
         <Route path="/Details" component={Details} />
+        <Route path="/Auth" component={Auth} />
+        <ProductConsumer>
+          {value => {
+            return (
+              <Route
+                path="/payment"
+                render={() =>
+                  value.loggedin ? <Payment /> : <Redirect to="/Auth" />
+                }
+              />
+            );
+          }}
+        </ProductConsumer>
         <Route path="*" component={Default} />
       </Switch>
       <Footer />

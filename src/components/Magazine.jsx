@@ -5,11 +5,11 @@ class Magazine extends Component {
     return (
       <div className="coming-soon">
         <div className="coming-soon-img">
-        <img src="img/under_construction.png" alt=""/>
+          <img src="img/under_construction.png" alt="" />
         </div>
         <div className="magazine-text">
-        <h1>Under Construction</h1>
-        <h3>Coming Soon...</h3>
+          <h1>Under Construction</h1>
+          <h3>Coming Soon...</h3>
         </div>
       </div>
     );
