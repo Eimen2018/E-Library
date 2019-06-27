@@ -5,6 +5,7 @@ import { ProductConsumer } from "../context";
 const Auth = () => {
   const [username, SetUserName] = useState("");
   const [password, SetPassword] = useState("");
+
   const updateName = e => {
     SetUserName(e.target.value);
   };
@@ -40,27 +41,24 @@ const Auth = () => {
                 placeholder="Password"
                 onChange={updatePassword}
               />
+              
               <ProductConsumer>
                 {value => {
                   return (
+                    <React.Fragment>
                     <Link
-                    onClick={() => 
-                      value.auth()
-                    }
+                      onClick={() => {
+                        value.auth(username, password);
+                      }}
                       to={{
-                        pathname:
-                          value.Account.username === username &&
-                          value.Account.password === password
-                            ? "/payment"
-                            : "/Auth"
+                        pathname: "/Account"
                       }}
                     >
-                      <button
-                        className="btn btn-outline-primary btn-md ml-auto login-btn"
-                      >
+                      <button className="btn btn-outline-primary btn-md ml-auto login-btn">
                         Login
                       </button>
                     </Link>
+                    </React.Fragment>
                   );
                 }}
               </ProductConsumer>

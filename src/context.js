@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { storeProducts, detailProduct, Account } from "./data";
+import { detailProduct } from "./data";
+import axios from "axios";
 
 const ProductContext = React.createContext();
 
@@ -7,7 +8,8 @@ class ProductProvider extends Component {
   state = {
     products: [],
     detailProduct: detailProduct,
-    Account: Account,
+    Account: [],
+    loggedinAccount: [],
     cart: [],
     cartSubtotal: 0,
     cartTax: 0,
@@ -16,30 +18,94 @@ class ProductProvider extends Component {
   };
 
   componentDidMount() {
-    this.setProducts();
+    // this.setProducts();
+    this.fetchData();
   }
-  auth = () => {
+
+  fetchData = () => {
+    axios
+      .all([
+        axios.get("http://localhost:80/E-commerce-Back-End/index.php?s=1"),
+        axios.get("http://localhost:80/E-commerce-Back-End/account.php?s=1")
+      ])
+      .then(
+        axios.spread((dataRes, accountRes) => {
+          this.setState({
+            products: dataRes.data,
+            Account: accountRes.data
+          });
+          console.log(dataRes.data);
+          console.log(accountRes.data);
+        })
+      );
+    // axios
+    //   .get(
+    //     "http://localhost:80/E-commerce-Back-End/index.php?s=1"
+    //   )
+    //   .then(response => {
+    //     console.log(response.data)
+    //     this.setState({
+    //       products: response.data
+    //     });
+    //   })
+    //   .catch(e => {
+    //     // this.errors.push(e);
+    //   });
+  };
+  sendData = formData => {
+    axios({
+      method: "post",
+      url: "http://localhost:80/E-commerce-Back-End/index.php",
+      data: formData,
+      config: { headers: { "Content-Type": "multipart/ form-data" } }
+    })
+      .then(response => {
+        console.log(response);
+        window.location.href = "/" + response.data + "s";
+      })
+      .catch(e => {
+        // this.errors.push(e);
+      });
+  };
+  auth = (username, password) => {
+    let tempAccount = [...this.state.Account];
+    if (this.getAccount(username) == -1) {
+    } else {
+      const account = tempAccount[this.getAccount(username)];
+      if (account.password === password) {
+        this.setState(() => {
+          return { loggedin: true, loggedinAccount: account };
+        });
+      } else {
+        // this.setState(() => {
+        //   return { loggedin: false };
+        // });
+        return <p>User name or password incorrect</p>;
+      }
+    }
+  };
+  logout = () => {
     this.setState(() => {
-      return { loggedin: !this.state.loggedin };
+      return { loggedin: false };
     });
   };
-  setProducts = () => {
-    let tempProducts = [];
-    storeProducts.forEach(item => {
-      const singleItem = { ...item };
-      tempProducts = [...tempProducts, singleItem];
-    });
-    this.setState(() => {
-      return {
-        products: tempProducts
-      };
-    });
-  };
+  // setProducts = () => {
+  //   let tempProducts = [];
+  //   storeProducts.forEach(item => {
+  //     const singleItem = { ...item };
+  //     tempProducts = [...tempProducts, singleItem];
+  //   });
+  //   this.setState(() => {
+  //     return {
+  //       products: tempProducts
+  //     };
+  //   });
+  // };
   getItem = id => {
     return this.state.products.find(item => item.id === id);
   };
-  getAccount = id => {
-    return this.state.Account.find(item => item.id === id);
+  getAccount = username => {
+    return this.state.Account.findIndex(item => item.username === username);
   };
   handleDetail = id => {
     const product = this.getItem(id);
@@ -53,7 +119,7 @@ class ProductProvider extends Component {
     const product = tempProducts[index];
     product.inCart = true;
     product.count = 1;
-    const price = product.price;
+    const price = parseInt(product.price);
     product.total = price;
     this.setState(
       () => {
@@ -83,7 +149,7 @@ class ProductProvider extends Component {
   };
   increment = id => {
     let tempCart = [...this.state.cart];
-    const selectedProduct = tempCart.find(item => item.id === id);
+    //const selectedProduct = tempCart.find(item => item.id === id);
     const index = tempCart.indexOf(this.getItem(id));
     const product = tempCart[index];
     product.count = product.count + 1;
@@ -101,7 +167,7 @@ class ProductProvider extends Component {
   };
   decrement = id => {
     let tempCart = [...this.state.cart];
-    const selectedProduct = tempCart.find(item => item.id === id);
+    //const selectedProduct = tempCart.find(item => item.id === id);
     const index = tempCart.indexOf(this.getItem(id));
     const product = tempCart[index];
     product.count = product.count - 1;
@@ -150,7 +216,7 @@ class ProductProvider extends Component {
         };
       },
       () => {
-        this.setProducts();
+        this.fetchData();
         this.addTotals();
       }
     );
@@ -182,7 +248,9 @@ class ProductProvider extends Component {
           removeItem: this.removeItem,
           clearCart: this.clearCart,
           checkout: this.Checkout,
-          auth:this.auth
+          auth: this.auth,
+          sendData: this.sendData,
+          logout: this.logout,
         }}
       >
         {this.props.children}

@@ -1,9 +1,9 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import { Switch, Route, Redirect } from "react-router-dom";
-import Books from "./components/Books";
+import Books from "./components/Books/Books";
 import LandingPage from "./components/Landing";
-import Handouts from "./components/Handouts";
+import Handouts from "./components/Handouts/Handouts";
 import Magazines from "./components/Magazines";
 import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,8 +11,11 @@ import "./App.css";
 import Details from "./components/Details";
 import Default from "./components/Default";
 import Auth from "./components/Auth.jsx";
-import Payment from "./components/Payment";
+import Account from "./components/Account";
+import Process from "./components/Process";
 import { ProductConsumer } from "./context";
+import Search from "./components/Search";
+import Registration from "./components/Registration";
 
 function App() {
   return (
@@ -25,19 +28,24 @@ function App() {
         <Route path="/Magazines" component={Magazines} />
         <Route path="/Details" component={Details} />
         <Route path="/Auth" component={Auth} />
+        <Route path="/Process" component={Process} />
+        <Route path="/Search" component={Search} />
+        <Route path="/Registration" component={Registration} />
         <ProductConsumer>
           {value => {
             return (
-              <Route
-                path="/payment"
-                render={() =>
-                  value.loggedin ? <Payment /> : <Redirect to="/Auth" />
-                }
-              />
+              <React.Fragment>
+                <Route
+                  path="/Account"
+                  render={() =>
+                    value.loggedin ? <Account /> : <Redirect to="/Auth" />
+                  }
+                />
+              </React.Fragment>
             );
           }}
         </ProductConsumer>
-        <Route path="*" component={Default} />
+        <Route component={Default} />
       </Switch>
       <Footer />
     </div>

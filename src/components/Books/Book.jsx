@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BookContainerStyle } from "./Book_container_Style";
 import { Link } from "react-router-dom";
-import { ProductConsumer } from "../context";
+import { ProductConsumer } from "../../context";
 
 class Book extends Component {
   state = {
@@ -29,7 +29,7 @@ class Book extends Component {
               />
             </Link>
             <div className="info ">
-              <h5>{title}</h5>
+              <h5>{title.length<16?title.substring(0,13)+"....":title}</h5>
               <button className="more ml-1 mr-5" disabled>${price}.00</button>
               <button
                 className="Addtocart-btn ml-2"

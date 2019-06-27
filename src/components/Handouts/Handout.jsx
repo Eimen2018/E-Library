@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ProductConsumer } from "../context";
+import { ProductConsumer } from "../../context";
 import { Link } from "react-router-dom";
 
 class Handout extends Component {
@@ -37,7 +37,7 @@ class Handout extends Component {
     return (
       <div className="handout-container" id={this.props.dept} name="test">
         <div className="handout">
-          <img src="img/ISS.jpg" alt="Handout" width="300px" height="300px" />
+          <img src={"img/"+this.props.dept+".jpg"} alt="Handout" width="300px" height="300px" />
           <h4>{this.props.dept}</h4>
           <button className="handout-btn" onClick={this.DisplayHandouts}>
             <span> {this.props.courselen}</span> Courses

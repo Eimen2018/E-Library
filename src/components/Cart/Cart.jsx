@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Card from "./Card";
 import EmptyCart from "./EmptyCart";
-import { ProductConsumer } from "../context";
+import { ProductConsumer } from "../../context";
 import { Link } from "react-router-dom";
 
 class Cart extends Component {
@@ -42,7 +42,7 @@ class Cart extends Component {
                           <h4 className="modal-title" id="myModalLabel2">
                             Cart items
                           </h4>
-                          <Link to={loggedin?"/payment":"/Auth"}>
+                          <Link to={loggedin?"/Account":"/Auth"}>
                             <button
                               className="btn-cart-checkout"
                               data-toggle="modal"

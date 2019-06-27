@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Link} from 'react-router-dom';
 
 class Landing extends Component {
   state = {};
@@ -15,8 +16,14 @@ class Landing extends Component {
               </p>
             </div>
             <div className="cta">
-              <button className="cta-help">Explore</button>
-              <button className="cta-add">Add To Cart</button>
+              <Link to="/Books"><button className="cta-help">Explore</button></Link>
+              <button
+                className="cta-add"
+                data-toggle="modal"
+                data-target="#myModal2"
+              >
+                See Cart
+              </button>
             </div>
           </div>
           <div className="cover">

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Book from "./Book";
 import style from "styled-components";
-import {ProductConsumer} from '../context';
+import {ProductConsumer} from '../../context';
 
 class Catagory extends Component {
   state = {
