@@ -14,7 +14,7 @@ import Auth from "./components/Auth.jsx";
 import Account from "./components/Account";
 import Process from "./components/Process";
 import { ProductConsumer } from "./context";
-import Search from "./components/Search";
+// import Admin from "./components/Admin";
 import Registration from "./components/Registration";
 
 function App() {
@@ -29,7 +29,6 @@ function App() {
         <Route path="/Details" component={Details} />
         <Route path="/Auth" component={Auth} />
         <Route path="/Process" component={Process} />
-        <Route path="/Search" component={Search} />
         <Route path="/Registration" component={Registration} />
         <ProductConsumer>
           {value => {

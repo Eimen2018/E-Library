@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { ProductConsumer } from "../context";
 import { Link } from "react-router-dom";
+import PayPalButton from "./PayPalButton";
 
 class Payment extends Component {
   state = {
-    cart:[]
+    cart: []
   };
   handleCount = () => {
     let c = 0;
@@ -77,6 +78,15 @@ class Payment extends Component {
                       Pay
                     </button>
                   </Link>
+                  {/* <div className="paypal float-right">
+                  <PayPalButton
+                  client={full_name}
+                    currency = {Currency}
+                    total={cartTotal}
+                    checkout={checkout}
+                    history={this.props.history}
+                  />
+                  </div> */}
                   <Link to="/Auth">
                     <button
                       className="btn  btn-danger float-left my-5"

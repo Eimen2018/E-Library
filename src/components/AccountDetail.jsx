@@ -18,7 +18,6 @@ class AccountDetail extends Component {
           </h3>
           <ProductConsumer>
             {value => {
-              console.log(value.loggedinAccount);
               const { full_name, Currency, balance } = value.loggedinAccount;
               return (
                 <React.Fragment>

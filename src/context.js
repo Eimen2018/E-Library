@@ -34,39 +34,29 @@ class ProductProvider extends Component {
             products: dataRes.data,
             Account: accountRes.data
           });
-          console.log(dataRes.data);
-          console.log(accountRes.data);
         })
       );
-    // axios
-    //   .get(
-    //     "http://localhost:80/E-commerce-Back-End/index.php?s=1"
-    //   )
-    //   .then(response => {
-    //     console.log(response.data)
-    //     this.setState({
-    //       products: response.data
-    //     });
-    //   })
-    //   .catch(e => {
-    //     // this.errors.push(e);
-    //   });
   };
-  sendData = formData => {
+
+  sendData = (formData, where) => {
+    const url =
+      where === 1
+        ? "http://localhost:80/E-commerce-Back-End/index.php"
+        : "http://localhost:80/E-commerce-Back-End/account.php";
     axios({
       method: "post",
-      url: "http://localhost:80/E-commerce-Back-End/index.php",
+      url: url,
       data: formData,
       config: { headers: { "Content-Type": "multipart/ form-data" } }
     })
       .then(response => {
-        console.log(response);
-        window.location.href = "/" + response.data + "s";
+        window.location.href = where == 1 ? "/" + response.data + "s" : "/Auth";
       })
       .catch(e => {
         // this.errors.push(e);
       });
   };
+
   auth = (username, password) => {
     let tempAccount = [...this.state.Account];
     if (this.getAccount(username) == -1) {
@@ -77,42 +67,32 @@ class ProductProvider extends Component {
           return { loggedin: true, loggedinAccount: account };
         });
       } else {
-        // this.setState(() => {
-        //   return { loggedin: false };
-        // });
         return <p>User name or password incorrect</p>;
       }
     }
   };
+
   logout = () => {
     this.setState(() => {
       return { loggedin: false };
     });
   };
-  // setProducts = () => {
-  //   let tempProducts = [];
-  //   storeProducts.forEach(item => {
-  //     const singleItem = { ...item };
-  //     tempProducts = [...tempProducts, singleItem];
-  //   });
-  //   this.setState(() => {
-  //     return {
-  //       products: tempProducts
-  //     };
-  //   });
-  // };
+
   getItem = id => {
     return this.state.products.find(item => item.id === id);
   };
+
   getAccount = username => {
     return this.state.Account.findIndex(item => item.username === username);
   };
+
   handleDetail = id => {
     const product = this.getItem(id);
     this.setState(() => {
       return { detailProduct: product };
     });
   };
+
   addToCart = id => {
     let tempProducts = [...this.state.products];
     const index = tempProducts.indexOf(this.getItem(id));
@@ -130,10 +110,9 @@ class ProductProvider extends Component {
       }
     );
   };
+
   Checkout = amount => {
     let tempAccouts = this.state.Account;
-    // const index = tempAccouts.indexOf(this.getAccount(id));
-    // const account = tempAccouts[index];
     tempAccouts.balance -= amount;
     this.setState(
       () => {
@@ -143,13 +122,12 @@ class ProductProvider extends Component {
       },
       () => {
         this.clearCart();
-        console.log(this.state.Account);
       }
     );
   };
+
   increment = id => {
     let tempCart = [...this.state.cart];
-    //const selectedProduct = tempCart.find(item => item.id === id);
     const index = tempCart.indexOf(this.getItem(id));
     const product = tempCart[index];
     product.count = product.count + 1;
@@ -165,9 +143,9 @@ class ProductProvider extends Component {
       }
     );
   };
+
   decrement = id => {
     let tempCart = [...this.state.cart];
-    //const selectedProduct = tempCart.find(item => item.id === id);
     const index = tempCart.indexOf(this.getItem(id));
     const product = tempCart[index];
     product.count = product.count - 1;
@@ -187,6 +165,7 @@ class ProductProvider extends Component {
       );
     }
   };
+
   removeItem = id => {
     let tempProducts = [...this.state.products];
     let tempCart = [...this.state.cart];
@@ -208,6 +187,7 @@ class ProductProvider extends Component {
       }
     );
   };
+
   clearCart = () => {
     this.setState(
       () => {
@@ -221,6 +201,7 @@ class ProductProvider extends Component {
       }
     );
   };
+
   addTotals = () => {
     let subTotal = 0;
     this.state.cart.map(item => (subTotal += item.total));
@@ -250,7 +231,7 @@ class ProductProvider extends Component {
           checkout: this.Checkout,
           auth: this.auth,
           sendData: this.sendData,
-          logout: this.logout,
+          logout: this.logout
         }}
       >
         {this.props.children}

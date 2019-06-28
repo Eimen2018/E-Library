@@ -33,13 +33,6 @@ class Details extends Component {
                   </div>
                   <div className="row">
                     <div className="col-10 mx-auto col-md-6">
-                      {/* <img
-                        src={img}
-                        alt=""
-                        className="img-fluid ml-5 detail-img"
-                        width="300"
-                        height="400"
-                      /> */}
                       <embed width="400" src="pdf/a.pdf" height="500px" />
                     </div>
                     <div className="col-10 mx-auto col-md-6 my-3 text-capitalize">

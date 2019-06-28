@@ -28,7 +28,7 @@ const Auth = () => {
               <input
                 type="text"
                 name="username"
-                className="form-control"
+                className="form-control mb-2"
                 value={username}
                 placeholder="User Name"
                 onChange={updateName}
@@ -36,28 +36,37 @@ const Auth = () => {
               <input
                 type="password"
                 name="password"
-                className="form-control"
+                className="form-control mb-2"
                 value={password}
                 placeholder="Password"
                 onChange={updatePassword}
               />
-              
+
               <ProductConsumer>
                 {value => {
                   return (
                     <React.Fragment>
-                    <Link
-                      onClick={() => {
-                        value.auth(username, password);
-                      }}
-                      to={{
-                        pathname: "/Account"
-                      }}
-                    >
-                      <button className="btn btn-outline-primary btn-md ml-auto login-btn">
-                        Login
-                      </button>
-                    </Link>
+                      <Link
+                        onClick={() => {
+                          value.auth(username, password);
+                        }}
+                        to={{
+                          pathname: "/Account"
+                        }}
+                      >
+                        <button className="btn btn-outline-primary btn-md ml-auto login-btn">
+                          Login
+                        </button>
+                      </Link>
+                      <Link
+                        to={{
+                          pathname: "/Registration"
+                        }}
+                      >
+                        <button className="btn btn-md ml-auto float-right">
+                          Create Account
+                        </button>
+                      </Link>
                     </React.Fragment>
                   );
                 }}

@@ -1,107 +1,106 @@
 import React, { useState } from "react";
 import { ProductConsumer } from "../context";
 
-const Registration = () => {
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [catagory, setCatagory] = useState("");
-  const [price, setPrice] = useState("");
-  const [type, setType] = useState("");
-  const [info, setInfo] = useState("");
-  const [img,setImg] = useState([]);
+const Admin = () => {
+  const [full_name, setFull_Name] = useState("");
+  const [balance, setBalance] = useState("");
+  const [currency, setCurrency] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  const updateTitle = e => {
-    setTitle(e.target.value);
+  const updateFull_Name = e => {
+    setFull_Name(e.target.value);
   };
-  const updateAuthor = e => {
-    setAuthor(e.target.value);
+  const updateBalance = e => {
+    setBalance(e.target.value);
   };
-  const updatePrice = e => {
-    setPrice(e.target.value);
+  const updateCurrency = e => {
+    setCurrency(e.target.value);
   };
-  const updateInfo = e => {
-    setInfo(e.target.value);
+  const updateUsername = e => {
+    setUsername(e.target.value);
   };
-  const updateCatagory = e => {
-    setCatagory(e.target.value);
-  };
-  const updateType = e => {
-    setType(e.target.value);
-  };
-  const updateImg = e => {
-    //   e.preventDefault();
-    setImg(e.target.files);
+  const updatePassword = e => {
+    setPassword(e.target.value);
   };
   return (
     <main>
       <section className="presentation">
-        <ProductConsumer>
-          {value => {
-            return (
-              <form
-                onSubmit={e => {
-                    
-                  let formData = new FormData();
-                  formData.append("title", title);
-                  formData.append("author", author);
-                  formData.append("catagory", catagory);
-                  formData.append("price", price);
-                  formData.append("type", type);
-                  formData.append("info", info);
-                  formData.append("img",img[0]);
-                  e.preventDefault();
-                  value.sendData(formData);
-                }}
-                encType="multipart/form-data"
-              >
-                <input
-                  type="text"
-                  name="title"
-                  className="form-control"
-                  onChange={updateTitle}
-                  placeholder="Title"
-                />
-                <input
-                  type="text"
-                  name="author"
-                  className="form-control"
-                  onChange={updateAuthor}
-                  placeholder="Author"
-                />
-                <select name="type" id="type" required onChange={updateType} className="form-control">
-                <option defaultValue="" disabled selected>Type</option>
-                <option defaultValue="Book" >Book</option >
-                <option defaultValue="Handout" >Handout</option>
-                <option defaultValue="Magazine" >Magazine</option>
-                </select>
-                <select name="catagory" id="cat" required onChange={updateCatagory} className="form-control">
-                <option defaultValue="" disabled selected>Catagory</option>
-                <option defaultValue="Programming" >Programming</option >
-                <option defaultValue="Fiction" >Fiction</option>
-                <option defaultValue="Educational" >Educational</option>
-                </select>
-                <input
-                  type="file"
-                  name="img"
-                  className="form-control"
-                  onChange={updateImg}
-                />
-                <input
-                  type="text"
-                  name="price"
-                  className="form-control"
-                  onChange={updatePrice}
-                  placeholder="Price"
-                />
-                <textarea name="info" id="info" cols="30" rows="10" required className="form-control" onChange={updateInfo} placeholder="Info"> </textarea>
-                <button type="submit" className="btn btn-outline-primary form-control">Submit</button>
-              </form>
-            );
-          }}
-        </ProductConsumer>
+        <div className="coming-soon">
+          <div className="coming-soon-img">
+            <img src="img/addAccount.png" alt="" className="w-75 mx-5 mt-5" />
+          </div>
+          <div className="magazine-text">
+            <ProductConsumer>
+              {value => {
+                return (
+                  <div className="upload-form-container d-flex mt-5">
+                    <form
+                      onSubmit={e => {
+                        let formData = new FormData();
+                        formData.append("full_name", full_name);
+                        formData.append("balance", balance);
+                        formData.append("currency", currency);
+                        formData.append("username", username);
+                        formData.append("password", password);
+                        e.preventDefault();
+                        value.sendData(formData, 2);
+                      }}
+                      encType="multipart/form-data"
+                    >
+                      <input
+                        type="text"
+                        name="full_name"
+                        className="form-control mb-2"
+                        onChange={updateFull_Name}
+                        placeholder="Full Name"
+                      />
+                      <input
+                        type="text"
+                        name="balance"
+                        className="form-control mb-2 pr-5"
+                        onChange={updateBalance}
+                        placeholder="Balance"
+                      />
+
+                      <input
+                        type="text"
+                        name="currency"
+                        className="form-control mb-2"
+                        onChange={updateCurrency}
+                        placeholder="Currency"
+                      />
+                      <input
+                        type="text"
+                        name="username"
+                        className="form-control mb-2"
+                        onChange={updateUsername}
+                        placeholder="Username"
+                      />
+                      <input
+                        type="password"
+                        name="password"
+                        className="form-control mb-2"
+                        onChange={updatePassword}
+                        placeholder="Password"
+                      />
+
+                      <button
+                        type="submit"
+                        className="btn btn-outline-primary float-right"
+                      >
+                        Create
+                      </button>
+                    </form>
+                  </div>
+                );
+              }}
+            </ProductConsumer>
+          </div>
+        </div>
       </section>
     </main>
   );
 };
 
-export default Registration;
+export default Admin;

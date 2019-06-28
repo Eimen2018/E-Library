@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import {ProductConsumer} from '../context';
-import Payment from './Payment';
-import AccountDetail from './AccountDetail';
+import { ProductConsumer } from "../context";
+import Payment from "./Payment";
+import AccountDetail from "./AccountDetail";
+import Admin from "./Admin";
 
 class Account extends Component {
   state = {};
@@ -10,9 +11,15 @@ class Account extends Component {
       <main>
         <section className="presentation">
           <ProductConsumer>
-              {value=>{
-                  return(value.cart.length>0?<Payment/>:<AccountDetail />);
-              }}
+            {value => {
+              return value.loggedinAccount.role === "admin" ? (
+                <Admin />
+              ) : value.cart.length > 0 ? (
+                <Payment history={this.props.history} />
+              ) : (
+                <AccountDetail />
+              );
+            }}
           </ProductConsumer>
         </section>
       </main>

@@ -39,7 +39,6 @@ class Catagory extends Component {
           <div className="slide" id={this.props.title}>
           <ProductConsumer>
             {(value)=>{
-              // console.log(value.product);
               let tempproduct = [...value.products];
               tempproduct = tempproduct.filter(item=>(item.catagory===this.props.title && item.type==="Book"));
               return (
