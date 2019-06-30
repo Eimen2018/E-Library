@@ -14,6 +14,7 @@ import Auth from "./components/Auth.jsx";
 import Account from "./components/Account";
 import Process from "./components/Process";
 import { ProductConsumer } from "./context";
+import { sessionService } from 'redux-react-session';
 // import Admin from "./components/Admin";
 import Registration from "./components/Registration";
 
@@ -22,7 +23,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Switch>
-        <Route path="/" exact component={LandingPage} />
+        <Route path="/" exact onEnter={sessionService.checkAuth} component={LandingPage} />
         <Route path="/Books" component={Books} />
         <Route path="/Handouts" component={Handouts} />
         <Route path="/Magazines" component={Magazines} />

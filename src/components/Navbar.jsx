@@ -139,7 +139,7 @@ class Navbar extends Component {
                 </button>
                 <Link to={value.loggedin ? "/Account" : "/Auth"}>
                   <button
-                    className="btn ml-3"
+                    className="btn ml-3 btn-login"
                     onClick={e =>
                       value.auth(value.loggedin ? "Login" : "logout")
                     }

@@ -274,6 +274,9 @@ textarea {
   .btn-cart {
     margin-top: 15px;
   }
+  .btn-login {
+    margin-top: 15px;
+  }
 }
 @media screen and (max-width: 619px) {
   .presentation {
@@ -723,4 +726,35 @@ textarea {
 }
 .upload-form-container select {
   text-align: center;
+}
+.error-img {
+  width: 2px;
+  height: 2px;
+}
+.btn-admin {
+  border: 1px solid #1f357d !important;
+  color: #1f357d !important;
+}
+.btn-admin:hover {
+  border: none;
+  background: #1f357d !important;
+  color: white !important;
+  transition: all 0.2s linear;
+}
+.admin-all-btn {
+  display: flex;
+  flex-direction: column;
+}
+.admin-card {
+  border: 1px solid #4c65b6 !important;
+}
+.admin-card-title {
+  color: #1f357d !important;
+}
+.account-container {
+  width: 500px;
+  overflow: hidden;
+}
+.auth-create {
+  color: #1f357d !important;
 }

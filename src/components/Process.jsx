@@ -27,9 +27,10 @@ class Process extends Component {
       };
       // server sent the url to the file!
       // now, let's download:
-      window.location.href = response.file;
+      // window.location.href = response.file;
+      // this.context.router.push('/');
       // you could also do:
-      // window.open(response.file);
+      window.open(response.file);
     }, 100);
   }
   render() {

@@ -63,7 +63,7 @@ const Auth = () => {
                           pathname: "/Registration"
                         }}
                       >
-                        <button className="btn btn-md ml-auto float-right">
+                        <button className="btn btn-md ml-auto float-right auth-create">
                           Create Account
                         </button>
                       </Link>

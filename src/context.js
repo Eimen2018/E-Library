@@ -26,7 +26,7 @@ class ProductProvider extends Component {
     axios
       .all([
         axios.get("http://localhost:80/E-commerce-Back-End/index.php?s=1"),
-        axios.get("http://localhost:80/E-commerce-Back-End/account.php?s=1")
+        axios.get("http://localhost:80/E-commerce-Back-End/account.php")
       ])
       .then(
         axios.spread((dataRes, accountRes) => {
@@ -57,6 +57,17 @@ class ProductProvider extends Component {
       });
   };
 
+  sendSession = username => {
+    axios
+            .get(
+              "http://localhost:80/E-commerce-Back-End/account.php?session=2"
+            )
+            .then(response => response.data)
+            .then(data => {
+              console.log(data);
+            });
+  };
+
   auth = (username, password) => {
     let tempAccount = [...this.state.Account];
     if (this.getAccount(username) == -1) {
@@ -72,6 +83,16 @@ class ProductProvider extends Component {
     }
   };
 
+  checkSession = () => {
+    axios
+            .get(
+              "http://localhost:80/E-commerce-Back-End/account.php?check=2"
+            )
+            .then(response => response.data)
+            .then(data => {
+              console.log(data);
+            });
+  }
   logout = () => {
     this.setState(() => {
       return { loggedin: false };
@@ -112,12 +133,12 @@ class ProductProvider extends Component {
   };
 
   Checkout = amount => {
-    let tempAccouts = this.state.Account;
-    tempAccouts.balance -= amount;
+    let tempAccout = this.state.loggedinAccount;
+    tempAccout.balance -= amount;
     this.setState(
       () => {
         return {
-          Account: tempAccouts
+          loggedinAccount: tempAccout
         };
       },
       () => {
@@ -187,6 +208,36 @@ class ProductProvider extends Component {
       }
     );
   };
+  removeAccount = name => {
+    let r = window.confirm(
+      "Are you Sure, You want to delete " + name + "'s Account"
+    );
+    if (r == true) {
+      let tempAccounts = [...this.state.Account];
+      let removeacc = tempAccounts[this.getAccount(name)];
+      tempAccounts = tempAccounts.filter(item => item.username !== name);
+      this.setState(
+        () => {
+          return {
+            Account: [...tempAccounts]
+          };
+        },
+        () => {
+          axios
+            .get(
+              "http://localhost:80/E-commerce-Back-End/account.php?id=" +
+                removeacc.id
+            )
+            .then(response => response.data)
+            .then(data => {
+              console.log(data);
+            });
+        }
+      );
+    } else {
+      console.log("You pressed Cancel!");
+    }
+  };
 
   clearCart = () => {
     this.setState(
@@ -231,7 +282,9 @@ class ProductProvider extends Component {
           checkout: this.Checkout,
           auth: this.auth,
           sendData: this.sendData,
-          logout: this.logout
+          logout: this.logout,
+          removeAccount: this.removeAccount,
+          checkSession:this.checkSession
         }}
       >
         {this.props.children}

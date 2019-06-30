@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { ProductConsumer } from "../context";
 import Payment from "./Payment";
 import AccountDetail from "./AccountDetail";
+import AdminUpload from "./AdminUpload";
 import Admin from "./Admin";
 
 class Account extends Component {
