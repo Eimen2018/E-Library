@@ -1,9 +1,10 @@
 ## This project was done using react.js as front end and php as a backend for mekelle university AIP project to make it work please follow the following tasks
-## 1. Copy E-commerce back-End folder to your xampp/htdocs folder or incase of wammp just copy to the folder
+## 1. Copy E-commerce back-End folder to your XAMP/htdocs folder or incase of WAMP just copy to the folder
 ## 2. Import the database to your server
 ## 3. you Need Node to run the app
 ## 4. The first time it loads it needs internet
 ## 5. To start the app just write `npm start` but before that you might have to check npm install to install the necessary package 
+## 6. Donot forget to run XAMP or WAMP server before starting the application
 
 ## Available Scripts
 
